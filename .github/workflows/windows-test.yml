@@ -1,0 +1,22 @@
+name: Windows Runner Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  show_windows:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: System info
+        run: |
+          Write-Host "=== OS Version ==="
+          [System.Environment]::OSVersion.VersionString
+          Get-ComputerInfo | Select-Object WindowsProductName, OsVersion | Format-List
+          Write-Host "=== Who am I ==="
+          whoami
+          Write-Host "=== Installed dev tools ==="
+          node --version
+          python --version
+          git --version
+          Write-Host "=== This machine deletes itself when this job ends ==="
